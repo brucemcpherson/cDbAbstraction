@@ -41,7 +41,8 @@ var dhConstants = {
     MAX_NUMBER: 9007199254740992, // this stuff is for lucene query ranges, dont know how to do negative numbers.
     MIN_NUMBER: 0,  
     MAX_STRING: '\uffff',
-    MIN_STRING: '\0000'
+    MIN_STRING: '\0000',
+    HIDDEN_KEY:'_$dbab$key$_'
   },
   ACTIONS: ['query','save','remove','count','get','update'],
   CODE: {  // negative errors are bad, postive are warning, 0 is good
@@ -77,7 +78,8 @@ var dhConstants = {
     TRANSACTION_ROLLBACK_FAILED:-23,
     TRANSACTION_FAILURE:-24,
     TRANSACTION_ID_MISMATCH:-25,
-    DRIVER_ASSERTION:-26
+    DRIVER_ASSERTION:-26,
+    KEY_ASSERTION:-27
   },
   ERROR: {
     OK:'',
@@ -112,7 +114,8 @@ var dhConstants = {
     TRANSACTION_FAILURE:'some transaction failure',
     TRANSACTION_INCAPABLE:'transactions not enabled for this driver',
     TRANSACTION_ID_MISMATCH:'trying to end the wrong transaction',
-    DRIVER_ASSERTION:'driver assertion failure'
+    DRIVER_ASSERTION:'driver assertion failure',
+    KEY_ASSERTION:"trying to save an object which already has a key"
   },
   CONSTRAINTS: {
     LT:'$lt',
