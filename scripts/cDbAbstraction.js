@@ -31,7 +31,7 @@ function getLibraryInfo () {
   return { 
     info: {
       name:'cDbAbstraction',
-      version:'2.1.3',
+      version:'2.2.0',
       key:'MHfCjPQlweartW45xYs6hFai_d-phDA33',
       description:'abstraction database handler',
       share:'https://script.google.com/d/1Ddsb4Y-QDUqcw9Fa-rJKM3EhG2caosS9Nhch7vnQWXP7qkaMmb1wjmTl/edit?usp=sharing'
@@ -95,7 +95,10 @@ function DbAbstraction ( driverLibrary , options) {
   this.transactionsState = function () {
     return transactions_;
   };
-
+ 
+  this.allDone = function () {
+    return self.makeResults(enums.CODE.OK);
+  }
   
  /** create the driver version
   * @return {string} the driver version
@@ -125,6 +128,30 @@ function DbAbstraction ( driverLibrary , options) {
       );
   };
   
+  /**
+   * forces a wait after a write for options.waitafter milliseconds
+   * the only driver i think this is needed for is orchestrate which has latency in its network 
+   * you only need this if you want to ensure that the change orchestrate has reported is committed is propogated through its infrastructure
+   * otherwise set it to 0 - the default
+   * @param {function} func what to do before waiting
+   * @param {*} return whater func() returns
+   */
+  this.waitAfter = function (func) {
+  
+    // do the thing
+    var r = func();
+    
+    // wiat a bit if necessary (only known driver this has any effect is orchestrate
+    if (options.waitafter) {
+      Utilities.sleep(options.waitafter);
+    }
+    else if (driver.WAITAFTER) {
+      Utilities.sleep (driver.WAITAFTER);
+    }
+    
+    // the function result
+    return r;
+  }
   /** 
   * return unique string
   * @memberof DbAbstraction
@@ -197,6 +224,43 @@ function DbAbstraction ( driverLibrary , options) {
 
   this.clone = function (o) {
     return cUseful.clone(o);
+  };
+  
+  /**
+   * get rid of fields that are specific to a driver
+   * @param {Array.string} drop the name of the driverfields to drop
+   * @param {string} keyName the keyName to extract -if you want it dropped too add to drop
+   * @param {Array.object} obs the objects to drop them from
+   * @return {object} {[obs],[keys]}
+   */
+  this.dropFields = function ( drop , keyName , obs) {
+    
+    // just in case its not an array
+    if (!Array.isArray(drop)) drop = drop ? [drop] : [];
+    if (!Array.isArray(obs)) obs = obs ? [obs] : [] ;
+    
+    // drop all the unwanted fields
+    return obs.reduce(function (p,c) {
+      
+      // split up the object into keys and data, and drop any unwanted field.
+      var x = Object.keys(c).reduce(function (cp,cc) {
+        // we keep it
+        if(drop.indexOf(cc) === -1) {
+          cp.ob[cc] = c[cc];
+        }
+        //transfer the key
+        if (cc === keyName) {
+          cp.key = c[cc];
+        }
+        return cp;
+      },{ob:{},key:undefined});
+      
+      // add to the pile
+      p.obs.push(x.ob);
+      p.keys.push(x.key);
+      
+      return p;
+    },{obs:[],keys:[]});
   };
   
   this.checksum = function checksum(o) {
@@ -383,6 +447,7 @@ function DbAbstraction ( driverLibrary , options) {
       ret.driverVersion = driver.getVersion();
       ret.table = driver.getTableName();
       ret.dbId = driver.getDbId();
+      ret.keyProperty = driver.getKeyProperty ? driver.getKeyProperty() : 'key';
     }
     else {
       ret.driverVersion = 'unknown driver version';
@@ -415,10 +480,12 @@ function DbAbstraction ( driverLibrary , options) {
   
   this.remove = function (queryOb,queryParams) {
 
+    
     return self.uaWrap ('remove', function () {
       self.voidCache();
       return driver.remove(queryOb,queryParams);
     });
+   
   };
   
   this.uaWrap = function (what, func) {
@@ -444,13 +511,13 @@ function DbAbstraction ( driverLibrary , options) {
     if (!ids) { 
       return self.makeResults(enums.CODE.NO_ACTION,'list of ids not present in removeByIds');
     }
-
+    
     return self.uaWrap ('removeByIds', function () {
-        if(!Array.isArray(ids)) ids = [];
-        self.voidCache();
-        return driver.removeByIds(ids);
+      if(!Array.isArray(ids)) ids = [ids];
+      self.voidCache();
+      return driver.removeByIds(ids);
     });
-
+    
   };
   /**
    * DbAbstraction.save()
@@ -458,15 +525,14 @@ function DbAbstraction ( driverLibrary , options) {
    * @param {object[]} obs array of objects to write
    * @return {object} results from selected handler
    */
-  
   this.save = function (obs) {
     
     return self.uaWrap ('save', function () {
-        self.voidCache();
-        var obArray = Array.isArray(obs) ? obs : [obs];
-        return driver.save(obArray);
+      self.voidCache();
+      var obArray = Array.isArray(obs) ? obs : [obs];
+      return driver.save(obArray);
     });
-
+    
   };
 
   /**
@@ -477,6 +543,7 @@ function DbAbstraction ( driverLibrary , options) {
   this.voidCache = function () {
     cacheVoid.putCache (self.getCob ([], 'v'),"v");
   };
+  
   /**
    * call with a cache object
    * if its timestamp is earlier that the last update for this silo it will return null
@@ -534,6 +601,7 @@ function DbAbstraction ( driverLibrary , options) {
     return cob ? self.makeResults(enums.CODE.CACHE, self.cobMessage(cob), cached) : null;
     
   };
+  
   /**
    * DbAbstraction.count()
    * @memberof DbAbstraction
@@ -542,7 +610,6 @@ function DbAbstraction ( driverLibrary , options) {
    * @param {boolean} [noCache=0] whether to suppress cache
    * @return {object} results from selected handler
    */
-  
   this.count = function (queryOb,queryParams,noCache) {
     
     return self.uaWrap ('count', function () {
@@ -565,6 +632,7 @@ function DbAbstraction ( driverLibrary , options) {
 
     
   };
+  
  /**
    * DbAbstraction.query()
    * @memberof DbAbstraction
@@ -574,13 +642,17 @@ function DbAbstraction ( driverLibrary , options) {
    * @param {boolean} [optKeepIds=false] whether or not to keep driver specifc ids in the results
    * @return {object} results from selected handler
    */
-  
   this.query = function (queryOb,queryParams,noCache,optKeepIds) {
     var cached,result;
 
     var keepIds = (typeof optKeepIds === 'undefined' ?  enums.SETTINGS.KEEPIDS : optKeepIds);
-    var cob = self.cobbery (queryOb,queryParams,noCache,"q");
-  
+    var cob;
+    
+    // we dont do caching if we need the ids
+    if (!optKeepIds) { 
+      cob = self.cobbery (queryOb,queryParams,noCache,"q");
+    }
+    
     if (cob) {
       return cob;
     }
@@ -654,7 +726,10 @@ function DbAbstraction ( driverLibrary , options) {
       var keepIds = (typeof optKeepIds === 'undefined' ?  enums.SETTINGS.KEEPIDS : optKeepIds);
       var cString = "g"+keepIds;
 
-      var cob = self.cobbery (key,undefined,noCache,cString);
+      var cob;
+      if(!optKeepIds) { 
+        cob = self.cobbery (key,undefined,noCache,cString);
+      }
       if (cob) {
         return cob;
       }
@@ -1135,7 +1210,9 @@ function DbAbstraction ( driverLibrary , options) {
   * @return {object} whatever func() returns
   */
   self.writeGuts = function (what, func, transactionFunc) {
-    return doGuts_ (self.lockingState() === enums.LOCKING.DISABLED   ,  what , func , transactionFunc) ;
+    return self.waitAfter( function () {
+      return doGuts_ (self.lockingState() === enums.LOCKING.DISABLED   ,  what , func , transactionFunc) ;
+    });
   };
   
   function doGuts_ (bypass , what , func, transactionFunc ) {
