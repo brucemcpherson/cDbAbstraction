@@ -22,6 +22,7 @@
  *   @param {boolean} [private=true] whether to use a private cache (not relevant if specificcache is passed)
  *   @param {ENUM.SETTINGS.TRANSACTIONS} [transactions=ENABLED] whether to allow transactions
  *   @param {ENUM.SETTINGS.LOCKING} [locking=ENABLED] what kind of locking to do
+ *   @param {number} waitafter the number of seconds to wait after a write operation. This should typically be zero, bur orchestrate has a non zero default
  */
 
 "use strict";
@@ -31,7 +32,7 @@ function getLibraryInfo () {
   return { 
     info: {
       name:'cDbAbstraction',
-      version:'2.2.0',
+      version:'2.2.1',
       key:'MHfCjPQlweartW45xYs6hFai_d-phDA33',
       description:'abstraction database handler',
       share:'https://script.google.com/d/1Ddsb4Y-QDUqcw9Fa-rJKM3EhG2caosS9Nhch7vnQWXP7qkaMmb1wjmTl/edit?usp=sharing'
