@@ -32,7 +32,7 @@ function getLibraryInfo () {
   return { 
     info: {
       name:'cDbAbstraction',
-      version:'2.2.1',
+      version:'2.2.2',
       key:'MHfCjPQlweartW45xYs6hFai_d-phDA33',
       description:'abstraction database handler',
       share:'https://script.google.com/d/1Ddsb4Y-QDUqcw9Fa-rJKM3EhG2caosS9Nhch7vnQWXP7qkaMmb1wjmTl/edit?usp=sharing'
