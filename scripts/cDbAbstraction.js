@@ -237,14 +237,15 @@ function DbAbstraction ( driverLibrary , options) {
   this.dropFields = function ( drop , keyName , obs) {
     
     // just in case its not an array
+
     if (!Array.isArray(drop)) drop = drop ? [drop] : [];
     if (!Array.isArray(obs)) obs = obs ? [obs] : [] ;
     
     // drop all the unwanted fields
     return obs.reduce(function (p,c) {
-      
+     
       // split up the object into keys and data, and drop any unwanted field.
-      var x = Object.keys(c).reduce(function (cp,cc) {
+      var x =  Object.keys(c).reduce(function (cp,cc) {
         // we keep it
         if(drop.indexOf(cc) === -1) {
           cp.ob[cc] = c[cc];
