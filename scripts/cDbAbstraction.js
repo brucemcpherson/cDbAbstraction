@@ -32,7 +32,7 @@ function getLibraryInfo () {
   return { 
     info: {
       name:'cDbAbstraction',
-      version:'2.2.2',
+      version:'2.2.3',
       key:'MHfCjPQlweartW45xYs6hFai_d-phDA33',
       description:'abstraction database handler',
       share:'https://script.google.com/d/1Ddsb4Y-QDUqcw9Fa-rJKM3EhG2caosS9Nhch7vnQWXP7qkaMmb1wjmTl/edit?usp=sharing'
@@ -65,7 +65,7 @@ function DbAbstraction ( driverLibrary , options) {
   var optSpecificCache = options.specificcache;
   var self = this;
   
-  var optOut = optOptOut || false;
+  var optOut = typeof optOptOut === typeof undefined ? true : optOptOut;
   var peanut = optPeanut || '';
   var accessToken = optAccessToken || '';
   var disableCache = optDisableCache || false;
