@@ -1,5 +1,5 @@
 # Google Apps Script Project: cDbAbstraction
-This repo (cDbAbstraction) was automatically updated on 27 July 2016 10:34:21 BST by GasGit
+This repo (cDbAbstraction) was automatically updated on 03 March 2017 16:56:37 GMT by GasGit
 
 For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")
 ## Details for Apps Script project cDbAbstraction
@@ -16,7 +16,7 @@ forPublishing| server_js
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
 cFlatten| cFlatten|MqxKdBrlw18FDd-X5zQLd7yz3TLx7pV4j|9|no|[here](libraries/cFlatten "library source")
-cUseful| cUseful|Mcbr-v4SsYKJP7JMohttAZyz3TLx7pV4j|45|no|[here](libraries/cUseful "library source")
+cUseful| cUseful|Mcbr-v4SsYKJP7JMohttAZyz3TLx7pV4j|77|no|[here](libraries/cUseful "library source")
 cNamedLock| cNamedLock|Mpv7vUR0126U53sfSMXsAPai_d-phDA33|15|no|[here](libraries/cNamedLock "library source")
 cCacheHandler| cCacheHandler|M3reA5eBxtwxSqCEgPywb9ai_d-phDA33|16|no|[here](libraries/cCacheHandler "library source")
 cUAMeasure| cUAMeasure|MIHfxr-fc_7bXa1l0Dkk0oqi_d-phDA33|6|no|[here](libraries/cUAMeasure "library source")
@@ -24,7 +24,7 @@ cUAMeasure| cUAMeasure|MIHfxr-fc_7bXa1l0Dkk0oqi_d-phDA33|6|no|[here](libraries/c
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
 cFlatten| cFlatten|MqxKdBrlw18FDd-X5zQLd7yz3TLx7pV4j|9|no|[here](libraries/cFlatten "library source")
-cUseful| cUseful|Mcbr-v4SsYKJP7JMohttAZyz3TLx7pV4j|45|no|[here](libraries/cUseful "library source")
+cUseful| cUseful|Mcbr-v4SsYKJP7JMohttAZyz3TLx7pV4j|77|no|[here](libraries/cUseful "library source")
 cNamedLock| cNamedLock|Mpv7vUR0126U53sfSMXsAPai_d-phDA33|15|no|[here](libraries/cNamedLock "library source")
 cCacheHandler| cCacheHandler|M3reA5eBxtwxSqCEgPywb9ai_d-phDA33|15|no|[here](libraries/cCacheHandler "library source")
 cUAMeasure| cUAMeasure|MIHfxr-fc_7bXa1l0Dkk0oqi_d-phDA33|6|no|[here](libraries/cUAMeasure "library source")
