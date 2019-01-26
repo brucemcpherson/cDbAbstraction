@@ -858,7 +858,7 @@ function DbAbstraction ( driverLibrary , options) {
     // add quotes if necessary
     var theQuote = optTheQuote || "'";
     var fType = optForce ? optForce.toUpperCase() : '';
-    Logger.log('optforce ' + fType);
+    
     if ( ( fType !== "NUMBER") || (!fType && (typeof item === "string" || cUseful.isDateObject(item))) ) {
       return theQuote + item.toString().replace(theQuote, "\\" + theQuote ) + theQuote;
     }
