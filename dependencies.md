@@ -1,5 +1,5 @@
 # Google Apps Script Project: cDbAbstraction
-This repo (cDbAbstraction) was automatically updated on 31 October 2018 11:38:23 GMT by GasGit
+This repo (cDbAbstraction) was automatically updated on 26 January 2019 17:22:43 GMT by GasGit
 
 For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")
 ## Details for Apps Script project cDbAbstraction
@@ -16,19 +16,19 @@ appsscript| json
 ### Directly referenced libraries
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
-cFlatten| cFlatten|12actArnmhP0hZTQng9Ysav1ZA3xfrkm1JA024mxDx4x4MEcPlc8Y2YDY|9|no|[here](libraries/cFlatten "library source")
-cNamedLock| cNamedLock|1uNcsHIUpZOJIT_ZedTa2mBE_gqCo0mH5OrNJMk4NWdyCNHQfiQjYXZ6u|15|no|[here](libraries/cNamedLock "library source")
-cCacheHandler| cCacheHandler|1U6j9t_3ONTbhTCvhjwANMcEXeHXr4shgzTG0ZrRnDYLcFl3_IH2b2eAY|16|no|[here](libraries/cCacheHandler "library source")
 cUAMeasure| cUAMeasure|17gzIYCpQ_8jN8rR1mQ8POa5VS5C4TYTiDuEIlpEMQmRGe2S51MvKf2LO|6|no|[here](libraries/cUAMeasure "library source")
-cUseful| cUseful|1EbLSESpiGkI3PYmJqWh3-rmLkYKAtCNPi1L2YCtMgo2Ut8xMThfJ41Ex|77|no|[here](libraries/cUseful "library source")
+cNamedLock| cNamedLock|1uNcsHIUpZOJIT_ZedTa2mBE_gqCo0mH5OrNJMk4NWdyCNHQfiQjYXZ6u|15|no|[here](libraries/cNamedLock "library source")
+cUseful| cUseful|1EbLSESpiGkI3PYmJqWh3-rmLkYKAtCNPi1L2YCtMgo2Ut8xMThfJ41Ex|111|no|[here](libraries/cUseful "library source")
+cCacheHandler| cCacheHandler|1U6j9t_3ONTbhTCvhjwANMcEXeHXr4shgzTG0ZrRnDYLcFl3_IH2b2eAY|17|no|[here](libraries/cCacheHandler "library source")
+cFlatten| cFlatten|12actArnmhP0hZTQng9Ysav1ZA3xfrkm1JA024mxDx4x4MEcPlc8Y2YDY|9|no|[here](libraries/cFlatten "library source")
 ### All dependencies and sub dependencies
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
-cFlatten| cFlatten|12actArnmhP0hZTQng9Ysav1ZA3xfrkm1JA024mxDx4x4MEcPlc8Y2YDY|9|no|[here](libraries/cFlatten "library source")
+cUAMeasure| cUAMeasure|17gzIYCpQ_8jN8rR1mQ8POa5VS5C4TYTiDuEIlpEMQmRGe2S51MvKf2LO|6|no|[here](libraries/cUAMeasure "library source")
 cNamedLock| cNamedLock|1uNcsHIUpZOJIT_ZedTa2mBE_gqCo0mH5OrNJMk4NWdyCNHQfiQjYXZ6u|15|no|[here](libraries/cNamedLock "library source")
 cCacheHandler| cCacheHandler|1U6j9t_3ONTbhTCvhjwANMcEXeHXr4shgzTG0ZrRnDYLcFl3_IH2b2eAY|15|no|[here](libraries/cCacheHandler "library source")
 cUseful| cUseful|1EbLSESpiGkI3PYmJqWh3-rmLkYKAtCNPi1L2YCtMgo2Ut8xMThfJ41Ex|32|no|[here](libraries/cUseful "library source")
-cUAMeasure| cUAMeasure|17gzIYCpQ_8jN8rR1mQ8POa5VS5C4TYTiDuEIlpEMQmRGe2S51MvKf2LO|6|no|[here](libraries/cUAMeasure "library source")
+cFlatten| cFlatten|12actArnmhP0hZTQng9Ysav1ZA3xfrkm1JA024mxDx4x4MEcPlc8Y2YDY|9|no|[here](libraries/cFlatten "library source")
 ### Enabled Google Services
 no libraries discovered
 ### Scopes required
